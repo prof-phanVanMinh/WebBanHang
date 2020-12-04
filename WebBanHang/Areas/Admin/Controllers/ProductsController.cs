@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
+using PagedList;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
@@ -15,11 +16,12 @@ namespace WebBanHang.Areas.Admin.Controllers
         private SaleStoreDB db = new SaleStoreDB();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(int ?page)
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(products.ToList());
-            //Them gi do vao DefaultController
+            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x=>x.Name);
+            int pageSize = 6;
+            int pageNumber = page ?? 1;
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Products/Details/5
