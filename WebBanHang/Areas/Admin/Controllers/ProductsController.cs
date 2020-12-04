@@ -19,6 +19,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         {
             var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
             return View(products.ToList());
+            //Them gi do vao DefaultController
         }
 
         // GET: Admin/Products/Details/5
