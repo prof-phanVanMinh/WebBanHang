@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebBanHang.Models.Product>
+<link href="~/Content/Custom.css" rel="stylesheet" />
+<div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Quản Lý Sản Phẩm
+        </h1>
+    </div>
+
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <!--    Striped Rows Table  -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-success"> <i class="fa fa-plus"></i> Thêm </a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <div class="form-inline">
+                                    <input type="search" class="form-control" placeholder="Nhập tên sản phẩm....">
+                                    <a href="#" class="btn btn-warning"> <i class="fa fa-search"></i> Tìm kiếm </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Nhà cung cấp</th>
+                                        <th>Đơn giá</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ProductId</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Category.Name</td>
+                                            <td>@item.Supplier.Name</td>
+                                            <td>@item.UnitPrice</td>
+                                            <td><img src="~/Images/products/@item.Image" width="100px" height="100px" /></td>
+                                            <td width="160px" style="vertical-align:middle">
+                                                <a href="#" class="btn btn-primary"> <i class="fa fa-edit"></i> Sửa </a>
+                                                <a href="#" class="btn btn-danger"> <i class="fa fa-pencil"></i> Xóa </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        Panel Footer
+
+                    </div>
+                </div>
+                <!--  End  Striped Rows Table  -->
+            </div>
+
+        </div>
+        <footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez.com</a></p></footer>
+    </div>
+
+    <!-- /. PAGE INNER  -->
+</div>
+

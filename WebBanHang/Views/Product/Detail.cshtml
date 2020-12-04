@@ -1,0 +1,45 @@
+﻿@model WebBanHang.Models.Product
+<div class="row">
+    <h2>Chi tiết hàng hóa</h2>
+    <div class=" col-md-6 text-left">
+        <img src="~/Images/products/@Model.Image" style="width:500px; height:auto" />
+    </div>
+    <ul class="col-md-6 text-left">
+        <li><b>Ma san pham:</b> @Model.ProductId</li>
+        <li><b>Ten hang:</b> @Model.Name</li>
+        <li><b>Gia Hang:</b> @Model.UnitPrice</li>
+        <li><b>Chung loai:</b>@Model.Category.Name</li>
+        <li><b>Nha cung cap:</b>@Model.Supplier.Name</li>
+    </ul>
+</div>
+<div class="row text-left">
+    @Model.Description
+</div>
+<hr />
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home1">Sản phẩm cùng loại(@Model.Category.Name)</a></li>
+    <li><a data-toggle="tab" href="#menu1">Sản phẩm được cung cấp bởi(@Model.Supplier.Name)</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="home1" class="tab-pane fade in active">
+        @foreach (var item in Model.Category.Products)
+        {
+            <div class="col-md-2" style="padding:5px">
+                <a href="/Product/Detail/@item.ProductId">  
+                    <img src="~/Images/products/@item.Image" style="width:100px;" />
+                </a>
+            </div>
+        }
+    </div>
+    <div id="menu1" class="tab-pane fade">
+        @foreach (var item in Model.Supplier.Products)
+        {
+            <div class="col-md-2" style="padding:5px">
+                <a href="/Product/Detail/@item.ProductId">
+                    <img src="~/Images/products/@item.Image" style="width:100px;" />
+                </a>
+            </div>
+        }
+    </div>
+</div>

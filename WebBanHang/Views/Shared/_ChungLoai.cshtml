@@ -1,0 +1,17 @@
+﻿@using WebBanHang.Models
+@{ 
+    var db = new SaleStoreDB();
+    var dsChungLoai = db.Categories.ToList();
+}
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        <span class="glyphicon glyphicon-list"></span>
+    CHỦNG LOẠI</a>
+    @foreach(var item in dsChungLoai)
+    {
+        <a href="@Url.Action("Index","Product",new { CatID=item.CategoryId})" class="list-group-item">@item.Name
+        <span class="badge">@item.Products.Count</span>
+    </a>
+    }
+
+</div>

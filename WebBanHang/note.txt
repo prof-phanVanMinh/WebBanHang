@@ -1,0 +1,2 @@
+﻿+ Tao link dieu huong trang co ket hop voi phan vung nhu sau:
+    <a href="@Url.Action("Index","Default",new { area = "Admin"},null)">

@@ -1,0 +1,57 @@
+﻿@model WebBanHang.Models.Cart
+
+@{
+                /**/
+
+                ViewBag.Title = "ViewCart";
+}
+<h2>Giỏ hàng của bạn</h2>
+@if (Model.Items.Count > 0)
+{
+    using (Html.BeginForm("UpdateCart", "ShoppingCart"))
+    {
+        <table class="table">
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        <img src="~/Images/products/@item.Product.Image" style="width:100px" />
+                        @item.Product.Name
+                    </td>
+                    <td>@item.Product.UnitPrice</td>
+                    <td>
+                        @Html.Hidden("ProductID", item.Product.ProductId)
+                        @Html.TextBox("Quantity", item.Quantity, new {@class="form-control" })
+                    </td>
+                    <td>$@item.Total</td>
+                    <td>
+                        <input type="submit" value="Update" class="btn btn-warning" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteCart", "ShoppingCart", new { ProID = item.Product.ProductId }, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="alert alert-success text-right">
+                        <lable>Sub Total:</lable> $@Model.SubTotal
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+}
+else
+{
+    <div class="alert alert-danger">
+        <b>Giỏ hang của bạn không có sản phẩm nào</b>
+    </div>
+}
+

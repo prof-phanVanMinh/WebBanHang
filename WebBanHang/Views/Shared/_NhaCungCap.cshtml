@@ -1,0 +1,15 @@
+﻿@using WebBanHang.Models
+@{ 
+    SaleStoreDB db = new SaleStoreDB();
+    var dsNhaCungCap = db.Suppliers.ToList();
+}
+<div class="list-group">
+   <a href="#" class="list-group-item active">Nhà cung cấp</a>
+    @foreach (var item in dsNhaCungCap)
+    {
+        <a href="@Url.Action("Index", "Product", new { SupID = item.SupplierId })" class="list-group-item">@item.Name
+        <span class="badge">@item.Products.Count</span>
+    </a>
+    }
+ </div>
+

@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<WebBanHang.Models.Product>
+@using PagedList.Mvc;
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("_ChungLoai")
+        @Html.Partial("_NhaCungCap")
+    </div>
+    <div class="col-md-9">
+<h2 class="text-center" style="font-size:14px;width:300px;padding:15px;color:white;border-radius:10px;margin:auto; background-color:#4cff00;">@ViewBag.TieuDe</h2>
+        <hr />
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        @item.Name
+                    </div>
+                    <div class="panel-body text-center" style="position:relative;">
+                        <img src="~/Images/products/@item.Image" style="width:100px;height:100px" />
+                        <div class=" text-center text-danger" style="position:absolute; z-index:1; background-color:yellow;left:3px;top:60px;border-radius:6px;">Trả góp 0%</div>
+                        <div class="text-center" style=" background-color:red; border-radius:5px;color:white;z-index:1;position:absolute;padding:4px 7px;top: 90px;left:3px;" >@item.UnitPrice usd</div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                           
+                            <div class="col-md-10 text-right">
+                                @Html.ActionLink("Detail", "Detail", "Product", new { ProID = item.ProductId }, new { @class = "btn btn-success"})
+                                @Html.ActionLink("Buy", "AddToCart", "ShoppingCart", new { ProID = item.ProductId }, new { @class = "btn btn-success"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+<div class="row text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, CatID = ViewBag.CatID, SupID=ViewBag.SupID }))
+</div>
+
