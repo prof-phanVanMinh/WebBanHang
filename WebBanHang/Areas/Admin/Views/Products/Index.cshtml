@@ -19,14 +19,16 @@
                                 <a href="#" class="btn btn-success"> <i class="fa fa-plus"></i> Thêm </a>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <div class="form-inline">
-                                    <input type="search" class="form-control" placeholder="Nhập tên sản phẩm....">
-                                    <a href="#" class="btn btn-warning"> <i class="fa fa-search"></i> Tìm kiếm </a>
-                                </div>
-                            </div>
+                                @using (Html.BeginForm("Index", "Products", FormMethod.Post, new { @class="form-inline"}))
+                                {
+                                    <input type="search" class="form-control" name="name" placeholder="Nhập tên sản phẩm....">
+                                    <button type="submit" class="btn btn-warning"> <i class="fa fa-search"></i> Tìm kiếm </button>     
+                                }
                         </div>
                     </div>
                     <div class="panel-body">
+                        @if (Model.Count > 0)
+                        {
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
@@ -59,11 +61,20 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="text-center">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+                        }
+                        else
+                        {
+                         <div class="alert alert-danger">
+                            Không tồn tại sản phẩm nào thỏa yêu cầu
                         </div>
+                        }
+                         <div class="text-center">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
+                    </div>
+                       
+                    <div class="panel-footer">
+                        panel-footer
 
                     </div>
                 </div>

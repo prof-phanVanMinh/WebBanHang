@@ -16,9 +16,15 @@ namespace WebBanHang.Areas.Admin.Controllers
         private SaleStoreDB db = new SaleStoreDB();
 
         // GET: Admin/Products
-        public ActionResult Index(int ?page)
+        public ActionResult Index(int ?page,string name="")
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x=>x.Name);
+            List<Product> products = null;
+            if(name!=null)
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(y => y.Name.Contains(name)).OrderBy(z => z.Name).ToList();
+            }
+            else
+            products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.Name).ToList();
             int pageSize = 6;
             int pageNumber = page ?? 1;
             return View(products.ToPagedList(pageNumber, pageSize));
