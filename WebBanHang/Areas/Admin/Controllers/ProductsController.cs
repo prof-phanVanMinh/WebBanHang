@@ -57,7 +57,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,Name,UnitPrice,Image,Description,CategoryId,SupplierId")] Product product)
         {
             if (ModelState.IsValid)

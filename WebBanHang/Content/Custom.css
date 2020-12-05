@@ -1,5 +1,11 @@
 ﻿body {
 }
-div > table > thead > tr > th {
+div > table > thead > tr > th,
+tbody >tr td
+{
     text-align: center;
+    vertical-align:middle;
+}
+table, td, th{
+    border: 1px dotted #00ffff;
 }

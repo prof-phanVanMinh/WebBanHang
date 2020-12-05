@@ -1,35 +1,36 @@
 ﻿@model PagedList.IPagedList<WebBanHang.Models.Product>
-    @using PagedList.Mvc;
+@using PagedList.Mvc;
+<link href="~/Content/Custom.css" rel="stylesheet" />
+<link href="~/Content/buttons.css" rel="stylesheet" />
 <section id="main-content">
     <section class="wrapper">
         <div class="table-agile-info">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic table
+                    <span style="color:#694444">DANH SÁCH SẢN PHẨM</span>
                 </div>
                 <div class="row w3-res-tb">
                     <div class="col-sm-5 m-b-xs">
-                        <select class="input-sm form-control w-sm inline v-middle">
-                            <option value="0">Bulk action</option>
-                            <option value="1">Delete selected</option>
-                            <option value="2">Bulk edit</option>
-                            <option value="3">Export</option>
-                        </select>
-                        <button class="btn btn-sm btn-default">Apply</button>
+                        <a href="@Url.Action("Create","Products")" class="button button--wayra button--border-thin button--text-upper button--size-s">Thêm mới sản phẩm</a>
+                        
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 " >
                     </div>
                     <div class="col-sm-3">
-                        <div class="input-group">
-                            <input type="text" class="input-sm form-control" placeholder="Search">
-                            <span class="input-group-btn">
-                                <button class="btn btn-sm btn-default" type="button">Go!</button>
-                            </span>
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Post,new { @class="input-group"}))
+                        {
+                                <input type="search" name="name" class="input-sm form-control" placeholder="Search">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="submit"><span class="fa fa-search" ></span>Search</button>
+                                </span>
+                            
+                        }
                         </div>
                     </div>
-                </div>
-                <div>
-                    <table class="table" ui-jq="footable" ui-options='{
+                    <div>
+                        @if (Model.Count > 0)
+                        {
+                            <table class="table"cellpadding="2px" ui-jq="footable" ui-options='{
         "paging": {
           "enabled": true
         },
@@ -39,92 +40,61 @@
         "sorting": {
           "enabled": true
         }}'>
-                        <thead>
-                            <tr>
-                                <th data-breakpoints="xs">ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th data-breakpoints="xs">Job Title</th>
+                                <thead>
+                                    <tr>
+                                        <th data-breakpoints="xs">ID</th>
+                                        <th> Tên sản phẩm</th>
+                                        <th>Đơn giá</th>
+                                        <th data-breakpoints="xs">Hình ảnh</th>
+                                        <th data-breakpoints="xs sm md" data-title="DOB">Mô tả sản phẩm</th>
+                                        <th data-breakpoints="xs">Chủng loại</th>
+                                        <th data-breakpoints="xs" colspan="4">nhà cung cấp</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tbody>
 
-                                <th data-breakpoints="xs sm md" data-title="DOB">Date of Birth</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-expanded="true">
-                                <td>1</td>
-                                <td>Dennise</td>
-                                <td>Fuhrman</td>
-                                <td>High School History Teacher</td>
+                                        <tr data-expanded="true">
+                                            <td>@item.ProductId</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.UnitPrice$</td>
+                                            <td><img src="~/Images/products/@item.Image" width="150px" /></td>
 
-                                <td>July 25th 1960</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Elodia</td>
-                                <td>Weisz</td>
-                                <td>Wallpaperer Helper</td>
+                                            <td style="max-width:250px; text-align:justify">@item.Description</td>
+                                            <td>@item.Category.Name</td>
+                                            <td>@item.Supplier.Name</td>
+                                            <td style="">
+                                                @Html.ActionLink("Sửa", "Edit", new { ID = item.ProductId }, new { @class = "btn btn-success", @style = "margin-bottom:2px;" })
+                                                @Html.ActionLink("Xóa", "Delete", new { ID = item.ProductId }, new { @class = "btn btn-danger" })
+                                            </td>
+                                        </tr>
 
-                                <td>March 30th 1982</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Raeann</td>
-                                <td>Haner</td>
-                                <td>Internal Medicine Nurse Practitioner</td>
 
-                                <td>February 26th 1966</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Junie</td>
-                                <td>Landa</td>
-                                <td>Offbearer</td>
 
-                                <td>March 29th 1966</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Solomon</td>
-                                <td>Bittinger</td>
-                                <td>Roller Skater</td>
+                                    </tbody>
+                                }
+                            </table>
 
-                                <td>September 22nd 1964</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Bar</td>
-                                <td>Lewis</td>
-                                <td>Clown</td>
-
-                                <td>August 4th 1991</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Usha</td>
-                                <td>Leak</td>
-                                <td>Ships Electronic Warfare Officer</td>
-
-                                <td>November 20th 1979</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Lorriane</td>
-                                <td>Cooke</td>
-                                <td>Technical Services Librarian</td>
-
-                                <td>April 7th 1969</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">
+                                Không tồn tại sản phẩm nào thỏa yêu cầu!
+                            </div>
+                        }
+                        <div class="text-center">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
+        <!-- footer -->
+        <div class="footer">
+            <div class="wthree-copyright">
+                <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+            </div>
         </div>
+        <!-- / footer -->
     </section>
-    <!-- footer -->
-    <div class="footer">
-        <div class="wthree-copyright">
-            <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-        </div>
-    </div>
-    <!-- / footer -->
-</section>
