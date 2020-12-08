@@ -27,7 +27,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="sel1">Category:</label>
-                                @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.Accounts, null, new { @class = "form-control" })
+                                @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.CategoryId, null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="sel1">SupplierId:</label>
+                                @Html.DropDownList("SupplierId", (IEnumerable<SelectListItem>)ViewBag.SupplierId, null, new { @class = "form-control" })
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">File input</label>
