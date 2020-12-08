@@ -17,6 +17,7 @@ namespace WebBanHang.Controllers
             int pageNumber = page ?? 1;
             return View(dsSanPhamMoi.ToPagedList(pageNumber,pageSize));
         }
+        
 
         public ActionResult About()
         {

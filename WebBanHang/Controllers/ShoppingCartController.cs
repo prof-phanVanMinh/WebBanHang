@@ -13,6 +13,7 @@ namespace WebBanHang.Controllers
         // GET: ShoppingCart
         public ActionResult AddToCart(int ProID)
         {
+            
             Cart cart = GetCart();
             Product p = db.Products.Find(ProID);
             //Gọi hàm thêm sản phầm từ lớp Cart của Namespace Models;

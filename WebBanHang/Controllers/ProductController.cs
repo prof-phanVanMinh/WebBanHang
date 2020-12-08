@@ -37,7 +37,7 @@ namespace WebBanHang.Controllers
             ViewBag.SupID = SupID;
             return View(dsProduct.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Detail(int ProID=101)
+        public ActionResult Detail(int ProID = 101)
         {
             var p = db.Products.Find(ProID);
             if (p == null)
