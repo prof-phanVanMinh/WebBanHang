@@ -16,7 +16,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         private SaleStoreDB db = new SaleStoreDB();
 
         // GET: Admin/Products
-        public ActionResult Index(int ?page,string name="")
+        public ActionResult Index(int ?page,string name)
         {
             List<Product> products = null;
             if(name!=null)
