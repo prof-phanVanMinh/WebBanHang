@@ -16,6 +16,7 @@ namespace WebBanHang.Controllers
             int pageSize = 6;
             int pageNumber = page ?? 1;
             return View(dsSanPhamMoi.ToPagedList(pageNumber,pageSize));
+            //hhh
         }
         
 
