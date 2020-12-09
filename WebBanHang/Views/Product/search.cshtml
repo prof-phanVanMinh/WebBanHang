@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<WebBanHang.Models.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "search";
+}
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+@foreach (var item in Model)
+{
+            <div class="col-md-3 col-sm-6">
+                <div class="single-shop-product">
+                    <div class="product-upper">
+                        <img src="~/Images/products/@item.Image"style="width:100px;height:100px" alt="">
+                    </div>
+                    <h2><a href="">@item.Name</a></h2>
+                    <div class="product-carousel-price">
+                        <ins>@item.UnitPrice</ins> <del>$999.00</del>
+                    </div>
+
+                    <div class="product-option-shop">
+                        <a class="add_to_cart_button"  rel="nofollow" href="@Url.Action("AddToCart", "ShoppingCart", new { ProID = item.ProductId })">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>@Html.PagedListPager(Model, page => Url.Action("search", new { page ,name=ViewBag.name}))</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

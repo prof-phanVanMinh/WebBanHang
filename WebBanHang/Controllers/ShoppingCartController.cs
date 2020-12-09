@@ -18,6 +18,7 @@ namespace WebBanHang.Controllers
             Product p = db.Products.Find(ProID);
             //Gọi hàm thêm sản phầm từ lớp Cart của Namespace Models;
             cart.AddItem(p, 1);
+            
             return RedirectToAction("ViewCart");
         }
         public ActionResult ViewCart()

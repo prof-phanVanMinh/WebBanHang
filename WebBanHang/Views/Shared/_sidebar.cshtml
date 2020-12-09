@@ -1,9 +1,10 @@
 ﻿<div class="single-sidebar">
     <h2 class="sidebar-title">Search Products</h2>
-    <form action="">
-        <input type="text" placeholder="Search products...">
+    @using (Html.BeginForm("search", "Product", FormMethod.Post, new { @class = "input-group" }))
+    {
+        <input  name="name"type="text" placeholder="Search products...">
         <input type="submit" value="Search">
-    </form>
+    }
 </div>
 
 <div class="single-sidebar">

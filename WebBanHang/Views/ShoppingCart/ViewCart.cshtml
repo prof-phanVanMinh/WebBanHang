@@ -35,9 +35,10 @@
 
             </thead>
 
-            @foreach (var item in Model.Items)
-            {
+           
             <tbody>
+@foreach (var item in Model.Items)
+{
                 <tr class="cart_item">
                     
                     <td class="product-remove">
@@ -57,18 +58,18 @@
                     </td>
 
                     <td class="product-quantity">
-                        @Html.Hidden("ProductID", item.Product.ProductId)
+                        @Html.Hidden("ProID", item.Product.ProductId)
                         <div class="quantity buttons_added">
-                            <input type="button" class="minus" value="-">
-                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
-                            <input type="button" class="plus" value="+">
+                            <input name="Quantity" type="number" size="4" class="input-text qty text" title="Qty" value="@item.Quantity" min="0" step="1">      
                         </div>
                     </td>
 
                     <td class="product-subtotal">
+                        
                         <span class="amount">@item.Total</span>
                     </td>
                 </tr>
+}
                 <tr>
                     <td class="actions" colspan="6">
                         <div class="coupon">
@@ -82,12 +83,7 @@
                 </tr>
             </tbody>
 
-                <tr>
-                    <td colspan="6" class="alert alert-success text-right">
-                        <lable>Sub Total:</lable> $@Model.SubTotal
-                    </td>
-                </tr>
-            }
+           
 
         </table>
     }
@@ -134,7 +130,7 @@ else
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
+                                            <td><span class="amount">@Model.SubTotal</span></td>
                                         </tr>
 
                                         <tr class="shipping">
@@ -144,7 +140,7 @@ else
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong> </td>
+                                            <td><strong><span class="amount">@Model.SubTotal</span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>

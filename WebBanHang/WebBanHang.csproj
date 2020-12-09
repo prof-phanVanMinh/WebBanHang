@@ -576,6 +576,7 @@
     <Content Include="Views\ShoppingCart\ViewCart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_sidebar.cshtml" />
+    <Content Include="Views\Product\search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -99,7 +99,7 @@
                         {
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="~/Images/products/@item.Image" alt="">
+                                    <img src="~/Images/products/@item.Image" style="height:300px; width:250px" alt="">
                                     <div class="product-hover">
                                         <a href="@Url.Action("AddToCart", "ShoppingCart", new { ProID = item.ProductId })" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         <a href="@Url.Action("Detail","Product",new { ProID = item.ProductId } )" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -132,7 +132,7 @@
                         @*lấy hình các nhà cung cấp*@ 
 @foreach (var item in dsNhaCungCap)
 {
-    <img src="~/Images/suppliers/@item.Logo" alt="">
+    <img src="~/Images/suppliers/@item.Logo" style="width:270px;height:120px" alt="">
 }
                     </div>
                 </div>

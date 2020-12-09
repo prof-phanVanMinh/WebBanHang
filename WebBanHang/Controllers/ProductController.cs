@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
 using PagedList;
+using System.Data.Entity;
 namespace WebBanHang.Controllers
 {
     public class ProductController : Controller
@@ -20,6 +21,7 @@ namespace WebBanHang.Controllers
             {
                 dsProduct = db.Products.Where(x => x.CategoryId == CatID).ToList();
                 ViewBag.TieuDe = db.Categories.Find(CatID).Name;
+                
             }
             else if(SupID!=null)
             {
@@ -36,7 +38,24 @@ namespace WebBanHang.Controllers
             ViewBag.CatID = CatID;
             ViewBag.SupID = SupID;
             return View(dsProduct.ToPagedList(pageNumber, pageSize));
+           
         }
+        public ActionResult search(int? page, string name = "")
+        {
+            int pageSize = 8;
+            int pageNumber = page ?? 1;
+            List<Product> products = null;
+            if (name == "")
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.Name).ToList();
+            }
+            
+            else
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(y => y.Name.Contains(name)).OrderBy(z => z.Name).ToList();
+            ViewBag.name = name;
+            return View(products.ToPagedList(pageNumber, pageSize));
+        }
+
         public ActionResult Detail(int ProID = 101)
         {
             var p = db.Products.Find(ProID);
