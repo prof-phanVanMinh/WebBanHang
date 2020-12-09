@@ -66,7 +66,7 @@
                                             <td>@item.Supplier.Name</td>
                                             <td style="">
                                                 @Html.ActionLink("Sửa", "Edit", new { ID = item.ProductId }, new { @class = "btn btn-success", @style = "margin-bottom:2px;" })
-                                                @Html.ActionLink("Xóa", "Delete", new { ID = item.ProductId }, new { @class = "btn btn-danger" })
+                                                @Html.ActionLink("Xóa", "Delete", new { ID = item.ProductId }, new { @class = "btn btn-danger", @onclick="return confirm('Bạn muốn xóa sản phẩm?')" })
                                             </td>
                                         </tr>
 
@@ -84,7 +84,7 @@
                             </div>
                         }
                         <div class="text-center">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, name = ViewBag.Name }))
                         </div>
                     </div>
                 </div>

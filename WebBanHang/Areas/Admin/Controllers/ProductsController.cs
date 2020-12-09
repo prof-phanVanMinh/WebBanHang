@@ -27,6 +27,7 @@ namespace WebBanHang.Areas.Admin.Controllers
             products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.Name).ToList();
             int pageSize = 6;
             int pageNumber = page ?? 1;
+            ViewBag.Name = name;
             return View(products.ToPagedList(pageNumber, pageSize));
         }
 
@@ -57,16 +58,22 @@ namespace WebBanHang.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,Name,UnitPrice,Image,Description,CategoryId,SupplierId")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var file = Request.Files["Image"];
+                if(file!=null && file.ContentLength>=0)
+                {
+                    String path = Server.MapPath("~/Images/products/" + file.FileName);
+                    file.SaveAs(path);
+                    product.Image = file.FileName;
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }                              
             }
-
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
             ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", product.SupplierId);
             return View(product);
@@ -128,19 +135,25 @@ namespace WebBanHang.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            else
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
         }
 
-        // POST: Admin/Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Admin/Products/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    db.Products.Remove(product);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
