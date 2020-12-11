@@ -1,4 +1,9 @@
 ﻿
+@{ 
+
+    var cart = Session["CART"] as WebBanHang.Models.Cart;
+ }
+
 <!DOCTYPE html>
 <!--
     ustora by freshdesignweb.com
@@ -45,7 +50,7 @@
                         <ul>
                             <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
+                             <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
                         </ul>
@@ -87,12 +92,26 @@
                         <h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/frontEnd/img/logo.png"></a></h1>
                     </div>
                 </div>
-
-                <div class="col-sm-6">
+             @if (cart==null)
+             {
+                <div  class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.html" id="tongtien">Cart - <span class="cart-amunt"> </span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="@Url.Action("ViewCart","ShoppingCart")"  >Cart - <span class="cart-amunt"> 0 </span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
+      
                     </div>
                 </div>
+             }
+             else
+             {
+                <div class="col-sm-6">
+                    <div class="shopping-item">
+                        <a href="@Url.Action("ViewCart","ShoppingCart")">Cart - <span class="cart-amunt">@cart.SubTotal </span> <i class="fa fa-shopping-cart"></i> <span class="product-count">@cart.Items.Count()</span></a>
+
+                    </div>
+                </div>
+
+             }
+
             </div>
         </div>
     </div> <!-- End site branding area -->
@@ -207,15 +226,7 @@
     </div> <!-- End footer bottom area -->
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script>
-
-       var a = document.getElementById("tongtien");
-       if()
-       { 
-           a.innerHTML = "0";
-       }else a.innerHTML=Model.Count
-        
-    </script>
+    
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 

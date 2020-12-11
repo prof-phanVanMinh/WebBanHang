@@ -12,7 +12,7 @@ namespace WebBanHang.Controllers
         public ActionResult Index(int ?page)
         {
             //Lấy 10 sản phẩm mới nhất
-            var dsSanPhamMoi = db.Products.OrderByDescending(s => s.CategoryId).Take(10).ToList();
+            var dsSanPhamMoi = db.Products.OrderByDescending(s => s.ProductId).Take(10).ToList();
             int pageSize = 6;
             int pageNumber = page ?? 1;
             return View(dsSanPhamMoi.ToPagedList(pageNumber,pageSize));

@@ -19,6 +19,7 @@ namespace WebBanHang.Models
             if (item == null)//neu chua ton tai cartItem co productID nay
             {
                 Items.Add(new CartItem { Product = p, Quantity = quantity });//tien hanh them mot CartItem vao gio hang 
+               
             }
             else//da ton tai CartItem voi productID nay
                 item.Quantity += quantity; 

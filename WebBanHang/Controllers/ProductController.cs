@@ -55,12 +55,21 @@ namespace WebBanHang.Controllers
             ViewBag.name = name;
             return View(products.ToPagedList(pageNumber, pageSize));
         }
-
+        public ActionResult viewALLnew(int? page)
+        {
+            int pageSize = 8;
+            int pageNumber = page ?? 1;
+            List<Product> products  = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderByDescending(x => x.ProductId).ToList();
+            
+            return View(products.ToPagedList(pageNumber, pageSize));
+        }
         public ActionResult Detail(int ProID = 101)
         {
+            
             var p = db.Products.Find(ProID);
             if (p == null)
                 return HttpNotFound();
+
             return View(p);
         }
     }
