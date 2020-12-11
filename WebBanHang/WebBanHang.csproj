@@ -175,6 +175,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012090751246_1.cs" />
+    <Compile Include="Migrations\202012090751246_1.Designer.cs">
+      <DependentUpon>202012090751246_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -184,6 +189,7 @@
     <Compile Include="Models\SaleStoreDB.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -536,7 +542,6 @@
     <Content Include="Content\backend\web\fonts\FontAwesome.otf" />
     <Content Include="Content\backend\web\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\backend\web\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
     <Content Include="Content\frontEnd\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\frontEnd\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\frontEnd\fonts\fontawesome-webfont.woff" />
@@ -544,6 +549,7 @@
     <Content Include="Content\frontEnd\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\frontEnd\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\frontEnd\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -591,6 +597,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012090751246_1.resx">
+      <DependentUpon>202012090751246_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

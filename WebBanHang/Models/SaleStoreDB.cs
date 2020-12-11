@@ -18,7 +18,9 @@ namespace WebBanHang.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,7 +31,7 @@ namespace WebBanHang.Models
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderDetails)
-                .WithRequired(e => e.Product)
+               .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
         }
     }
