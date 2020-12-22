@@ -1,0 +1,4 @@
+https://entityframework.net/
+
+
+https://www.c-sharpcorner.com/article/forms-authentication-in-mvc/

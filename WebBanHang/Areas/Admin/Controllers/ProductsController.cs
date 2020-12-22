@@ -11,6 +11,7 @@ using PagedList;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private SaleStoreDB db = new SaleStoreDB();

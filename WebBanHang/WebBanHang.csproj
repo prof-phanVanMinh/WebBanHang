@@ -501,6 +501,7 @@
     <Content Include="Images\suppliers\Seamen.jpg" />
     <Content Include="Images\suppliers\SM.jpg" />
     <Content Include="Images\suppliers\SS.jpg" />
+    <Content Include="diachithamkhao.txt" />
     <Content Include="note.txt" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />

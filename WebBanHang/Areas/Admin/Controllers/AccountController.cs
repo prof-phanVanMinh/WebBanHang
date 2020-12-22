@@ -12,7 +12,6 @@ namespace WebBanHang.Areas.Admin.Controllers
         public ActionResult Login()
         {
             return View();
-            //ddd
         }
     }
 }
