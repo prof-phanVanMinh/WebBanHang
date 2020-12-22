@@ -9,7 +9,7 @@ namespace WebBanHang.Models
     {
 
         [Key]
-        public string UserName { set; get; }
-        public string PassWord { set; get; }
+        public string username { set; get; }
+        public string password { set; get; }
     }
 }
