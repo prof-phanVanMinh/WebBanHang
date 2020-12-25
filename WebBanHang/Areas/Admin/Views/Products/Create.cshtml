@@ -5,7 +5,6 @@
         <div class="table-agile-info">
             <div class="panel panel-default">
 
-                <h2>Create</h2>
 
                 
                 @using (Html.BeginForm("Create","Products",FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -13,7 +12,7 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
-                        <h4>Product</h4>
+                        <h2>Thêm mới sản phẩm</h2>
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
@@ -35,16 +34,21 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <input type="file" name="Image" class="btn btn-row" />
+                                <input type="file" name="file" id="file" class="btn btn-row" />
                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                @ViewBag.Message
                             </div>
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextArea("Description", new { @name = "Description", @id = "Description", @class = "form-control", @rows = "200" })
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                <script type="text/javascript">CKEDITOR.replace("Description");</script>
+                                @*@Html.EditorFor(model=>model.Description,  new { htmlAtrributes = new { id = "Description", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+
                             </div>
                         </div>
 

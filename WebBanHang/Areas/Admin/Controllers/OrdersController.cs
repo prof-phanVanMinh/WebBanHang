@@ -10,6 +10,7 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private SaleStoreDB db = new SaleStoreDB();

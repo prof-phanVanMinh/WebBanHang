@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHang.Models;
 using PagedList;
+using System.IO;
 
 namespace WebBanHang.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     public class ProductsController : Controller
     {
         private SaleStoreDB db = new SaleStoreDB();
@@ -48,6 +49,7 @@ namespace WebBanHang.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Create
+        [HttpGet]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
@@ -59,21 +61,32 @@ namespace WebBanHang.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,Name,UnitPrice,Image,Description,CategoryId,SupplierId")] Product product)
+       [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Create( Product product, FormCollection fc)
         {
             if (ModelState.IsValid)
             {
-                var file = Request.Files["Image"];
-                if(file!=null && file.ContentLength>=0)
+                var f = Request.Files["file"];
+                if (f != null && f.ContentLength > 0)
                 {
-                    String path = Server.MapPath("~/Images/products/" + file.FileName);
-                    file.SaveAs(path);
-                    product.Image = file.FileName;
+                   // try
+                    //{
+                        string filePathOriginal = Server.MapPath("/Images/products");
+                    string saveFileName = Path.Combine(filePathOriginal, f.FileName);
+                        f.SaveAs(saveFileName);
+                        product.Image = f.FileName;
+                        ViewBag.Message = "File uploaded successfully";
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                   // }
+                }
+                product.Description = fc["Description"];
                     db.Products.Add(product);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
-                }                              
+                    return RedirectToAction("Index");                                      
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", product.CategoryId);
             ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", product.SupplierId);
